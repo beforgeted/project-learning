@@ -1,0 +1,10 @@
+{
+  "schema_version": "project-learning/checks/1",
+  "version": "example-1",
+  "rule_ref": "虚构示例：仅演示标签输出格式，不代表项目验收标准",
+  "checks": [
+    {"id": "labels-present", "kind": "required_keys", "path": "", "keys": ["labels"]},
+    {"id": "labels-not-empty", "kind": "nonempty", "path": "/labels"},
+    {"id": "labels-allowed", "kind": "subset_of", "path": "/labels", "values": ["合格", "待复核"]}
+  ]
+}

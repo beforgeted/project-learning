@@ -1,0 +1,4 @@
+interface:
+  display_name: "项目经验沉淀"
+  short_description: "为评测中台沉淀项目经验与 SOP，核验入库依据、召回、时效、样本证据和验收状态"
+  default_prompt: "请使用 $project-learning 整理本项目的方案、试跑和经验，检查入库门槛、知识有效期与验收证据，并分别报告保存、索引和召回验证状态。"

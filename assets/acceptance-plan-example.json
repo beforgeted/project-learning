@@ -1,0 +1,20 @@
+{
+  "schema_version": "project-learning/acceptance-plan/1",
+  "plan_id": "example-only",
+  "revision": "1",
+  "subject": {
+    "record_id": "example/approach",
+    "revision": "1",
+    "run_id": "example-not-executed",
+    "data_scope": "Fictitious example; replace with actual dataset and sample range",
+    "acceptance_scope": "Automatic output checks plus required human review"
+  },
+  "criteria_authority": "proposed",
+  "authority_ref": "Example only, not an approved business standard",
+  "coverage": "unknown",
+  "excluded_scope": [],
+  "checks": [
+    {"id": "automatic-checks", "purpose": "Replace with a pinned result_ref after execution", "required": true, "status": "not_run", "reason": "Example has no actual report"},
+    {"id": "human-review", "purpose": "Record actual completion of required human work", "required": true, "status": "not_run", "reason": "No human review performed"}
+  ]
+}
