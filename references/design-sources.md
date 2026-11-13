@@ -21,3 +21,18 @@ v0.4 另依据一次本地机标项目的实际试跑和隔离验证补充：带
 v0.5 依据 Self-Instruct 跨项目案例的本地查询记录，补充术语映射关系、宽泛查询的补查、候选与阅读窗口分开记账、逐主张适用性审查，以及旧元数据冲突的派生记录。观察到原业务词无命中、合理改写后目标仍靠后、状态词产生宽泛命中；据此完善决策规则，没有更换或宣称改进搜索算法。原业务记录及复盘证据保留在项目工作区，不随 Skill 安装包分发。未新增外部项目设计归因；新规则仍需独立场景验证其检索效果。
 
 后续服务仍需实现权限过滤、真实索引与查询、幂等写入及并发控制、Agent 运行接口、模型/人工评估器和异步状态回写。本 Skill 的字段与本地检查器不代表这些服务已经存在。现有 Agent 链路仍由用户提供。
+
+## v0.6.2：SOP 提炼及其自身验证
+
+2026-11-13 阅读下列公开设计，按本地 Self-Instruct 离线审计适配。研究上游指令和文档不等于安装或执行上游框架。
+
+| 来源 | 具体借鉴 | 本次适配和实际依据 |
+|---|---|---|
+| [Compound Engineering：保存形式选择](https://github.com/EveryInc/compound-engineering-plugin/blob/main/skills/ce-compound/references/form.md) | 选择能阻止问题重现的最小形式；检查既要正常通过也要对缺陷失败 | 允许规则、决策表、子流程；为检查器建立五个错误输出负例，另对复跑验收目标作正反例诊断。不照搬仅保存已解决问题的范围，失败证据仍保留 |
+| [Hermes：技能组织](https://hermes-agent.nousresearch.com/docs/user-guide/features/skills#agent-managed-skills-skill_manage-tool) | 将操作方法和对应步骤的陷阱组织在一起，较长参考按需读取 | 形成离线审计子流程及分支表；来源证据仍留业务项目。本次未证明这种组织方式改善执行结果 |
+| [Claudeception：Skill 提取](https://github.com/blader/Claudeception/blob/62dbb91d1183a866b5cf40079265c825b2695843/SKILL.md) | 明确触发、步骤、验证和例外；检查重复后更新 | 将经验映射到触发—信号—决策—例外—验证；并非每条经验都生成新 Skill |
+| [Anthropic skill-creator](https://github.com/anthropics/skills/blob/main/skills/skill-creator/SKILL.md)、[grader](https://github.com/anthropics/skills/blob/main/skills/skill-creator/agents/grader.md) | 基线与新版本对照、查看实际产物、检查评分条件是否有效 | 同输入、同脚本、每版两个独立会话，原产物冻结后独立核验。允许打平；缺少可比耗时和 Token 就不报告效率提升 |
+
+本次四组对 82,439 条公开数据及 14 条构造记录的正式路由和追溯一致，两类损坏批次均保留失败范围。实际支持的是“当前检查内未观察到优劣”，不支持“新版更好”或“任意输入下等效”。两类后续改动有产物依据：原版一份交付的验收器只读旧目录；提炼版两份报告的未评审数量表达有歧义。SOP 指引据此增加成对检查运行/复核入口及区分已确认通过数和未知实际质量。
+
+Distilly 的资料提取/个人偏好分层、Hindsight 的混合召回也在前期研究中查看，但本次试验没有检验人物资料提取或检索后端，不将它们列为本次实测改进来源。
