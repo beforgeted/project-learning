@@ -2,7 +2,7 @@
 name: project-learning
 description: 为模型评测中台积累可召回的 AI 协作项目知识：记录标注、审核、合成等需求特征、资源引用、方案取舍、试跑评价、问题解法和经验，沉淀可复用 SOP。用于项目记录、阶段复盘、历史检索及中台知识交接；支持代码、已提供的 Agent 链路、平台工作流和人工协作。不因仅提到 AI 或项目就归档，不负责建设中台或上线 Agent 链路。
 metadata:
-  version: "0.6.2"
+  version: "0.6.3"
 ---
 
 # Project Learning
