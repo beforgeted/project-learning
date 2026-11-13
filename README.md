@@ -2,7 +2,7 @@
 
 为 AI 协作项目记录方案、实验、问题和经验，并逐步形成可复用的 SOP，为后续模型评测中台积累有依据的项目知识。
 
-当前版本：**v0.5.0**。适用于机标、审核、质检、合成数据等项目，实施方式可以是代码、已提供的 Agent 链路、平台工作流或人工协作。核心指令见 [SKILL.md](SKILL.md)。
+当前版本：**v0.6.0**。适用于机标、审核、质检、合成数据等项目，实施方式可以是代码、已提供的 Agent 链路、平台工作流或人工协作。核心指令见 [SKILL.md](SKILL.md)。
 
 ## 定位
 
@@ -214,3 +214,23 @@ python scripts/assess_validity.py --record <record.json> --as-of <带时区的IS
 - [方案、实验和经验模板](references/records.md)
 - [SOP 成熟度与维护](references/sop.md)
 - [设计来源及适配说明](references/design-sources.md)
+
+
+## v0.6：项目绑定与只读实验画布
+
+在指定 Codex 项目中明确启用后，记录范围与模式保存在业务工作区的 `project-learning/project-binding.json`。支持 enabled/manual/paused；默认未绑定时仅显式调用。一个 Codex 项目可以包含多个业务子项目。项目 ID 与路径核对后再记录；迁移或 worktree 需要明确登记。此机制不提供后台监听。
+
+实验节点保存问题、改动、执行状态、验收状态、证据和运行列表。派生、复验、组合关系支持多个来源且禁止演进环路；对照和参考关系不代表执行依赖。重跑增加运行，配置或验证问题实质变化才产生新实验。历史批次保留原粒度，不能从汇总反向编造独立实验。
+
+[配置与数据约定](references/project-graph.md) · [机标摘要记录](examples/youtube.json) · [Self-Instruct 摘要记录](examples/self-instruct.json)
+
+在仓库根目录执行（输出必须不存在）：
+
+```sh
+python scripts/render_canvas.py --graph examples/youtube.json --output youtube-canvas.html
+python scripts/render_canvas.py --graph examples/self-instruct.json --output self-instruct-canvas.html
+```
+
+生成离线只读 HTML，可点击节点定位详情；包含关系列表、真实执行与验收状态、原证据定位及哈希。案例 JSON 是本地实际记录的摘要映射，原始日志仍未发布；unknown attempt_id 表示未从汇总恢复，不能当成真实尝试编号。Self-Instruct 的 replay 指数据来自历史公开生成，离线审计本身为本次新执行。
+
+新版案例摘要明确保留机标留出失败、人工未完成，以及 Self-Instruct 生成、语义/人工质检、训练未执行。画布不调用模型、不自动执行、不支持编辑回写；只生成可审查的小型图，结构检查不替代证据真实性或业务验收。

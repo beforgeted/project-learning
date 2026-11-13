@@ -1,0 +1,56 @@
+{
+  "schema_version": "project-learning/graph/1",
+  "project_id": "youtube-spam-pilot",
+  "provenance": "Historical batch summaries; attempt_id unknown, not newly executed. Evidence locators refer to external case workspace.",
+  "nodes": [
+    {
+      "id": "youtube-spam-pilot/E-001",
+      "title": "开发批次：四种配置比较",
+      "question": "记录这次尝试的验证范围",
+      "change": "保留历史批次，不倒造新运行",
+      "execution_status": "completed",
+      "acceptance_status": "incomplete",
+      "evidence": [
+        {
+          "locator": "youtube-spam-pilot/experiments/E-001.md",
+          "sha256": "c728fc9c457665812b0e56217e3977fe9dff3f8cf6d5f5996766516ac84dc419"
+        }
+      ],
+      "runs": [
+        {
+          "run_id": "dev-001",
+          "attempt_id": "unknown",
+          "origin": "fresh"
+        }
+      ]
+    },
+    {
+      "id": "youtube-spam-pilot/E-002",
+      "title": "留出复验：93.20%，人工未完成",
+      "question": "记录这次尝试的验证范围",
+      "change": "保留历史批次，不倒造新运行",
+      "execution_status": "completed",
+      "acceptance_status": "fail",
+      "evidence": [
+        {
+          "locator": "youtube-spam-pilot/experiments/E-002.md",
+          "sha256": "258d63a7ecab70c43dd9e3b060c2044baa73a386997ec22dd8702364215564f5"
+        }
+      ],
+      "runs": [
+        {
+          "run_id": "test-001",
+          "attempt_id": "unknown",
+          "origin": "fresh"
+        }
+      ]
+    }
+  ],
+  "edges": [
+    {
+      "source": "youtube-spam-pilot/E-001",
+      "target": "youtube-spam-pilot/E-002",
+      "relation": "retests"
+    }
+  ]
+}

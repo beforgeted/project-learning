@@ -1,0 +1,90 @@
+{
+  "schema_version": "project-learning/graph/1",
+  "project_id": "self-instruct-transfer",
+  "provenance": "Published data replay with fresh local audit; planned stages are derived from approach, not executed experiments.",
+  "nodes": [
+    {
+      "id": "self-instruct-transfer/E-001",
+      "title": "公开数据离线审计：82439 条",
+      "question": "记录这次尝试的验证范围",
+      "change": "保留历史批次，不倒造新运行",
+      "execution_status": "completed",
+      "acceptance_status": "incomplete",
+      "evidence": [
+        {
+          "locator": "self-instruct-transfer/experiments.md",
+          "sha256": "ef182fcbea8ce0585058812942fcea0f3ac236bc423b14cc5f4b49048cca36df"
+        }
+      ],
+      "runs": [
+        {
+          "run_id": "SI-audit-001",
+          "attempt_id": "unknown",
+          "origin": "replay"
+        }
+      ]
+    },
+    {
+      "id": "self-instruct-transfer/PLAN-generation",
+      "title": "新模型生成：未执行",
+      "question": "记录这次尝试的验证范围",
+      "change": "待提供生成模型和预算",
+      "execution_status": "not_run",
+      "acceptance_status": "not_assessed",
+      "evidence": [
+        {
+          "locator": "self-instruct-transfer/approaches.md",
+          "sha256": "b273e0a75de2b604ce7ddff4a554ffc0d4efde2ac8cbd374efe27e6689eac18b"
+        }
+      ],
+      "runs": []
+    },
+    {
+      "id": "self-instruct-transfer/PLAN-review",
+      "title": "语义与人工质检：未执行",
+      "question": "记录这次尝试的验证范围",
+      "change": "待提供独立评审及人工",
+      "execution_status": "not_run",
+      "acceptance_status": "not_assessed",
+      "evidence": [
+        {
+          "locator": "self-instruct-transfer/approaches.md",
+          "sha256": "b273e0a75de2b604ce7ddff4a554ffc0d4efde2ac8cbd374efe27e6689eac18b"
+        }
+      ],
+      "runs": []
+    },
+    {
+      "id": "self-instruct-transfer/PLAN-training",
+      "title": "训练与下游评价：未执行",
+      "question": "记录这次尝试的验证范围",
+      "change": "待提供训练环境和独立评价",
+      "execution_status": "not_run",
+      "acceptance_status": "not_assessed",
+      "evidence": [
+        {
+          "locator": "self-instruct-transfer/approaches.md",
+          "sha256": "b273e0a75de2b604ce7ddff4a554ffc0d4efde2ac8cbd374efe27e6689eac18b"
+        }
+      ],
+      "runs": []
+    }
+  ],
+  "edges": [
+    {
+      "source": "self-instruct-transfer/E-001",
+      "target": "self-instruct-transfer/PLAN-generation",
+      "relation": "references"
+    },
+    {
+      "source": "self-instruct-transfer/PLAN-generation",
+      "target": "self-instruct-transfer/PLAN-review",
+      "relation": "references"
+    },
+    {
+      "source": "self-instruct-transfer/PLAN-review",
+      "target": "self-instruct-transfer/PLAN-training",
+      "relation": "references"
+    }
+  ]
+}
