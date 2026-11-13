@@ -1,33 +1,48 @@
 {
-  "schema_version": "project-learning/graph/1",
+  "schema_version": "project-learning/graph/2",
   "project_id": "self-instruct-transfer",
-  "provenance": "Published data replay with fresh local audit; planned stages are derived from approach, not executed experiments.",
+  "provenance": "上游合成数据为历史 replay；SI-audit-001 是新执行的本地审计 fresh。PLAN 节点仅来自方案草稿，不是实验结果。生成、独立语义/人工质检、训练和下游评价均未执行。证据路径相对外部案例工作区 project-learning/。",
   "nodes": [
     {
       "id": "self-instruct-transfer/E-001",
       "title": "公开数据离线审计：82439 条",
-      "question": "记录这次尝试的验证范围",
-      "change": "保留历史批次，不倒造新运行",
+      "question": "公开合成实例的结构、重复和评测重合如何分流并保留证据？",
+      "change": "新执行本地审计；未重新生成上游数据",
       "execution_status": "completed",
       "acceptance_status": "incomplete",
       "evidence": [
         {
           "locator": "self-instruct-transfer/experiments.md",
           "sha256": "ef182fcbea8ce0585058812942fcea0f3ac236bc423b14cc5f4b49048cca36df"
+        },
+        {
+          "locator": "self-instruct-transfer/runs/audit-report.json",
+          "sha256": "971720ecb5e3ce78e733657c1c331ab0d426f72f161e011d4cd2b30fe7b2f794"
         }
       ],
       "runs": [
         {
           "run_id": "SI-audit-001",
           "attempt_id": "unknown",
-          "origin": "replay"
+          "origin": "fresh",
+          "phase": "published_artifact_audit",
+          "input_origin": "replay"
         }
-      ]
+      ],
+      "kind": "experiment",
+      "criteria_authority": "proposed",
+      "pending_checks": [
+        "生成",
+        "独立语义质检",
+        "人工质检",
+        "训练和下游评价"
+      ],
+      "acceptance_scope": "新合成方案的完整业务验收；不等于本次离线检查的执行状态"
     },
     {
       "id": "self-instruct-transfer/PLAN-generation",
       "title": "新模型生成：未执行",
-      "question": "记录这次尝试的验证范围",
+      "question": "此节点是原方案中的未执行阶段，并非已开展实验",
       "change": "待提供生成模型和预算",
       "execution_status": "not_run",
       "acceptance_status": "not_assessed",
@@ -37,12 +52,18 @@
           "sha256": "b273e0a75de2b604ce7ddff4a554ffc0d4efde2ac8cbd374efe27e6689eac18b"
         }
       ],
-      "runs": []
+      "runs": [],
+      "kind": "planned_stage",
+      "criteria_authority": "proposed",
+      "pending_checks": [
+        "生成模型、预算及实际生成"
+      ],
+      "acceptance_scope": "待按当前业务约定独立验收的计划阶段"
     },
     {
       "id": "self-instruct-transfer/PLAN-review",
       "title": "语义与人工质检：未执行",
-      "question": "记录这次尝试的验证范围",
+      "question": "此节点是原方案中的未执行阶段，并非已开展实验",
       "change": "待提供独立评审及人工",
       "execution_status": "not_run",
       "acceptance_status": "not_assessed",
@@ -52,12 +73,18 @@
           "sha256": "b273e0a75de2b604ce7ddff4a554ffc0d4efde2ac8cbd374efe27e6689eac18b"
         }
       ],
-      "runs": []
+      "runs": [],
+      "kind": "planned_stage",
+      "criteria_authority": "proposed",
+      "pending_checks": [
+        "独立语义评审、人工争议闭环"
+      ],
+      "acceptance_scope": "待按当前业务约定独立验收的计划阶段"
     },
     {
       "id": "self-instruct-transfer/PLAN-training",
       "title": "训练与下游评价：未执行",
-      "question": "记录这次尝试的验证范围",
+      "question": "此节点是原方案中的未执行阶段，并非已开展实验",
       "change": "待提供训练环境和独立评价",
       "execution_status": "not_run",
       "acceptance_status": "not_assessed",
@@ -67,24 +94,33 @@
           "sha256": "b273e0a75de2b604ce7ddff4a554ffc0d4efde2ac8cbd374efe27e6689eac18b"
         }
       ],
-      "runs": []
+      "runs": [],
+      "kind": "planned_stage",
+      "criteria_authority": "proposed",
+      "pending_checks": [
+        "训练对照和下游评价"
+      ],
+      "acceptance_scope": "待按当前业务约定独立验收的计划阶段"
     }
   ],
   "edges": [
     {
       "source": "self-instruct-transfer/E-001",
       "target": "self-instruct-transfer/PLAN-generation",
-      "relation": "references"
+      "relation": "references",
+      "basis": "离线审计为后续方案提供参考，不是新生成执行依赖"
     },
     {
       "source": "self-instruct-transfer/PLAN-generation",
       "target": "self-instruct-transfer/PLAN-review",
-      "relation": "references"
+      "relation": "planned_next",
+      "basis": "approaches.md 步骤2、5、6描述的计划阶段顺序，未执行、未调度"
     },
     {
       "source": "self-instruct-transfer/PLAN-review",
       "target": "self-instruct-transfer/PLAN-training",
-      "relation": "references"
+      "relation": "planned_next",
+      "basis": "approaches.md 步骤2、5、6描述的计划阶段顺序，未执行、未调度"
     }
   ]
 }

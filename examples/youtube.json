@@ -1,12 +1,12 @@
 {
-  "schema_version": "project-learning/graph/1",
+  "schema_version": "project-learning/graph/2",
   "project_id": "youtube-spam-pilot",
-  "provenance": "Historical batch summaries; attempt_id unknown, not newly executed. Evidence locators refer to external case workspace.",
+  "provenance": "原机标开发/留出批次摘要，未新执行。运行本身为 fresh，输入来自公开历史数据 replay。批次下 attempt_id 未恢复，以 unknown 表示。验收为 AI 提议门槛；证据路径相对外部案例工作区 project-learning/。",
   "nodes": [
     {
       "id": "youtube-spam-pilot/E-001",
       "title": "开发批次：四种配置比较",
-      "question": "记录这次尝试的验证范围",
+      "question": "比较四种配置并选择开发方案，报告自动质量、覆盖及人工缺口",
       "change": "保留历史批次，不倒造新运行",
       "execution_status": "completed",
       "acceptance_status": "incomplete",
@@ -14,43 +14,68 @@
         {
           "locator": "youtube-spam-pilot/experiments/E-001.md",
           "sha256": "c728fc9c457665812b0e56217e3977fe9dff3f8cf6d5f5996766516ac84dc419"
+        },
+        {
+          "locator": "youtube-spam-pilot/reviews/v0.4/dev-full.summary.json",
+          "sha256": "fd0bceafcac03ffd47ea14459304aff2a146fac945817fd6389b2bb7a72a9bfb"
         }
       ],
       "runs": [
         {
           "run_id": "dev-001",
           "attempt_id": "unknown",
-          "origin": "fresh"
+          "origin": "fresh",
+          "phase": "labeling",
+          "input_origin": "replay"
         }
-      ]
+      ],
+      "kind": "experiment",
+      "criteria_authority": "proposed",
+      "pending_checks": [
+        "人工复核"
+      ],
+      "acceptance_scope": "选定 A3-nb-0.90 的机标及人工复核流程；不是全部候选方案的共同验收"
     },
     {
       "id": "youtube-spam-pilot/E-002",
       "title": "留出复验：93.20%，人工未完成",
-      "question": "记录这次尝试的验证范围",
-      "change": "保留历史批次，不倒造新运行",
+      "question": "开发集选定的配置在独立视频留出集是否仍达标？",
+      "change": "保留 A3-nb-0.90，评价范围从开发400条切到留出311条；仍有A1对照",
       "execution_status": "completed",
       "acceptance_status": "fail",
       "evidence": [
         {
           "locator": "youtube-spam-pilot/experiments/E-002.md",
           "sha256": "258d63a7ecab70c43dd9e3b060c2044baa73a386997ec22dd8702364215564f5"
+        },
+        {
+          "locator": "youtube-spam-pilot/reviews/v0.4/holdout-full.summary.json",
+          "sha256": "d486b160038edaf42891aa64c69c4222db31634c5eb88125375d0c4f22e21662"
         }
       ],
       "runs": [
         {
           "run_id": "test-001",
           "attempt_id": "unknown",
-          "origin": "fresh"
+          "origin": "fresh",
+          "phase": "labeling",
+          "input_origin": "replay"
         }
-      ]
+      ],
+      "kind": "experiment",
+      "criteria_authority": "proposed",
+      "pending_checks": [
+        "人工复核"
+      ],
+      "acceptance_scope": "选定 A3-nb-0.90 的机标及人工复核流程；不是全部候选方案的共同验收"
     }
   ],
   "edges": [
     {
       "source": "youtube-spam-pilot/E-001",
       "target": "youtube-spam-pilot/E-002",
-      "relation": "retests"
+      "relation": "retests",
+      "basis": "E-002 复验 E-001 选定配置；数据范围改变，不解释为单一改进因素的因果结果"
     }
   ]
 }
